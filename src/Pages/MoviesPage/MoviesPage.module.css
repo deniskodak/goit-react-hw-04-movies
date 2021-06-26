@@ -1,0 +1,35 @@
+.form {
+  padding: 20px 40px;
+}
+
+.input {
+  padding: 4px 8px;
+  border-radius: 6%;
+}
+.label {
+  margin-right: 30px;
+}
+.btn {
+  padding: 6px 18px;
+  background-color: #5855f2a3;
+  border: none;
+  border-radius: 15%;
+  color: white;
+  font-weight: 500;
+  outline: none;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #0e0af1a3;
+}
+
+.btn:active {
+  color: #0e0af1a3;
+  background-color: white;
+  border: 1px solid #0e0af1a3;
+}
+
+.list {
+  padding: 0px 40px;
+}

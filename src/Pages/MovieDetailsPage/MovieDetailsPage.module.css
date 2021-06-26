@@ -1,0 +1,29 @@
+.postcard {
+  display: flex;
+}
+
+.postcard__info {
+  margin-left: 30px;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.votes {
+  font-weight: bolder;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.overview {
+  margin-bottom: 30px;
+}
+
+.genres__list {
+  display: flex;
+}
+
+.genres__item:not(:last-child) {
+  margin-right: 20px;
+}

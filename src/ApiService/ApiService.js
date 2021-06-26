@@ -27,7 +27,7 @@ class ApiService {
   }
 
   getMovieById(id) {
-    const directory = `movie/${id}?`;
+    const directory = `movie/${id}?append_to_response=credits,reviews&`;
     const url = this.makeUrl(directory);
 
     return this.makeRequest(url);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import "./HomePage.module.css";
+import styles from "./HomePage.module.css";
 
 import ApiService from "../../ApiService/ApiService";
 const apiService = new ApiService();
@@ -21,7 +21,7 @@ class HomePage extends Component {
         <section>
           <h1>Trending today</h1>
           {movies && (
-            <ul>
+            <ul className={styles.list}>
               {movies.map(({ id, original_title }) => (
                 <li key={id}>{original_title}</li>
               ))}
