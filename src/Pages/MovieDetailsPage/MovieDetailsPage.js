@@ -73,13 +73,28 @@ class MovieDetailsPage extends Component {
               </div>
             </div>
 
-            <div>
+            <div className={styles.additional_box}>
+              <h2 className={styles.additional_title}>
+                Additional information
+              </h2>
               <ul>
                 <li>
-                  <NavLink to={`${match.url}/cast`}>Cast</NavLink>
+                  <NavLink
+                    to={`${match.url}/cast`}
+                    className={styles.link}
+                    activeClassName={styles.link__active}
+                  >
+                    Cast
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to={`${match.url}/reviews`}>Reviews</NavLink>
+                  <NavLink
+                    to={`${match.url}/reviews`}
+                    className={styles.link}
+                    activeClassName={styles.link__active}
+                  >
+                    Reviews
+                  </NavLink>
                 </li>
               </ul>
               <Route
