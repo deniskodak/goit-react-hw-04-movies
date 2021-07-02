@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import styles from "./HomePage.module.css";
 
+import MoviesList from "../../Components/MoviesList";
 import ApiService from "../../ApiService/ApiService";
 const apiService = new ApiService();
 
@@ -16,17 +16,13 @@ class HomePage extends Component {
 
   render() {
     const { movies } = this.state;
+
     return (
       <>
         <section>
           <h1>Trending today</h1>
-          {movies && (
-            <ul className={styles.list}>
-              {movies.map(({ id, original_title }) => (
-                <li key={id}>{original_title}</li>
-              ))}
-            </ul>
-          )}
+
+          {movies && <MoviesList movies={movies} />}
         </section>
       </>
     );

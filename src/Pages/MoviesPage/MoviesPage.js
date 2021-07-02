@@ -1,6 +1,7 @@
-import styles from "./MoviesPage.module.css";
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+
+import MoviesList from "../../Components/MoviesList";
+import Form from "../../Components/Form";
 
 import ApiService from "../../ApiService/ApiService";
 const apiService = new ApiService();
@@ -12,47 +13,19 @@ class MoviesPage extends Component {
     page: 1,
   };
 
-  handleChange = (e) => {
-    const value = e.target.value;
-    this.setState({ value });
+  getMovies = async (keyword) => {
+    const movies = await apiService.getMoviesByQuery(keyword);
+    this.setState({ movies });
   };
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    const { value } = this.state;
 
-    const movies = await apiService.getMoviesByQuery(value);
-    this.setState({ movies, value: "" });
-  };
   render() {
-    const { value, movies } = this.state;
-    const { match } = this.props;
+    const { movies } = this.state;
 
     return (
       <>
-        <form onSubmit={this.handleSubmit} className={styles.form}>
-          <label className={styles.label}>
-            <input
-              className={styles.input}
-              type="text"
-              value={value}
-              onChange={this.handleChange}
-              placeholder="Find movie..."
-            />
-          </label>
-          <button className={styles.btn} type="submit">
-            Search
-          </button>
-        </form>
+        <Form onSubmit={this.getMovies} />
 
-        {movies && movies.length > 0 && (
-          <ul className={styles.list}>
-            {movies.map(({ id, original_title }) => (
-              <li key={id}>
-                <NavLink to={`${match.url}/${id}`}>{original_title}</NavLink>
-              </li>
-            ))}
-          </ul>
-        )}
+        {movies && movies.length > 0 && <MoviesList movies={movies} />}
       </>
     );
   }

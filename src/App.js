@@ -1,41 +1,35 @@
-import "./App.css";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import routes from "./routes";
 
-import HomePage from "./Pages/HomePage";
-import MovieDetailsPage from "./Pages/MovieDetailsPage";
-import MoviesPage from "./Pages/MoviesPage";
+import AppBar from "./Components/AppBar/AppBar";
+import ContainerWithLoader from "./Components/Loader/Loader";
 
-import { NavLink, Route, Switch } from "react-router-dom";
+const HomePage = lazy(
+  () => import("./Pages/HomePage") /* webpackChunkName: "HomePage" */
+);
+const MovieDetailsPage = lazy(
+  () =>
+    import(
+      "./Pages/MovieDetailsPage"
+    ) /* webpackChunkName: "MovieDetailsPage" */
+);
+const MoviesPage = lazy(
+  () => import("./Pages/MoviesPage") /* webpackChunkName: "MoviesPage" */
+);
 
 function App() {
   return (
     <>
-      <header className="header-section">
-        <ul className="site-nav__list">
-          <li className="site-nav__item">
-            <NavLink
-              to="/"
-              className="site-nav__link"
-              activeClassName="site-nav__link--active"
-            >
-              home
-            </NavLink>
-          </li>
-          <li className="site-nav__item">
-            <NavLink
-              to="/movies"
-              className="site-nav__link"
-              activeClassName="site-nav__link--active"
-            >
-              movies
-            </NavLink>
-          </li>
-        </ul>
-      </header>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/movies/:movieId" component={MovieDetailsPage} />
-        <Route path="/movies" component={MoviesPage} />
-      </Switch>
+      <AppBar />
+      <Suspense fallback={<ContainerWithLoader />}>
+        <Switch>
+          <Route exact path={routes.home} component={HomePage} />
+          <Route path={routes.movieDetails} component={MovieDetailsPage} />
+          <Route path={routes.movies} component={MoviesPage} />
+          <Redirect to={routes.home} />
+        </Switch>
+      </Suspense>
     </>
   );
 }

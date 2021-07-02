@@ -5,6 +5,7 @@ import { NavLink, Route } from "react-router-dom";
 
 import Cast from "../../Components/Cast";
 import Reviews from "../../Components/Reviews";
+import ButtonGoBack from "../../Components/ButtonGoBack";
 
 import ApiService from "../../ApiService/ApiService";
 const apiService = new ApiService();
@@ -16,15 +17,22 @@ class MovieDetailsPage extends Component {
     overview: null,
     genres: null,
     vote_average: null,
+    poster_path: null,
     credits: null,
     reviews: null,
   };
+
   async componentDidMount() {
     const { movieId } = this.props.match.params;
-
     const movie = await apiService.getMovieById(movieId);
     this.setState({ ...movie });
   }
+
+  handleGoBack = () => {
+    const { history, location } = this.props;
+    return history.push(location?.state?.from);
+  };
+
   render() {
     const {
       original_title,
@@ -36,9 +44,15 @@ class MovieDetailsPage extends Component {
       credits,
       reviews,
     } = this.state;
+
     const { match } = this.props;
+
     return (
       <>
+        {this.props.history.action === "PUSH" && (
+          <ButtonGoBack goBack={this.handleGoBack} />
+        )}
+
         {original_title && (
           <>
             <div className={styles.postcard}>
@@ -97,14 +111,19 @@ class MovieDetailsPage extends Component {
                   </NavLink>
                 </li>
               </ul>
-              <Route
-                path="/movies/:movieId/cast"
-                render={(props) => <Cast {...props} acters={credits} />}
-              />
-              <Route
-                path="/movies/:movieId/reviews"
-                render={(props) => <Reviews {...props} reviews={reviews} />}
-              />
+
+              {credits && (
+                <Route
+                  path={`${match.path}/cast`}
+                  render={(props) => <Cast {...props} acters={credits} />}
+                />
+              )}
+              {reviews && (
+                <Route
+                  path={`${match.path}/reviews`}
+                  render={(props) => <Reviews {...props} reviews={reviews} />}
+                />
+              )}
             </div>
           </>
         )}
@@ -112,5 +131,4 @@ class MovieDetailsPage extends Component {
     );
   }
 }
-
 export default MovieDetailsPage;

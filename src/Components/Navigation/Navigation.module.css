@@ -1,0 +1,20 @@
+.nav {
+  display: flex;
+}
+
+.link:not(:last-child) {
+  margin-right: 30px;
+}
+
+.link {
+  text-transform: capitalize;
+  font-size: 16px;
+  text-decoration: none;
+  color: inherit;
+  text-transform: capitalize;
+}
+
+.link__active {
+  font-weight: 600;
+  color: #5855f2a3;
+}
