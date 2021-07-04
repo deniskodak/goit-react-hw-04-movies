@@ -13,7 +13,13 @@ class Form extends Component {
   };
 
   handleSubmit = (e) => {
+    const { value } = this.state;
     e.preventDefault();
+
+    if (!value) {
+      return;
+    }
+
     this.props.onSubmit(this.state.value);
   };
 

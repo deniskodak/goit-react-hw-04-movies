@@ -29,8 +29,10 @@ class MoviesPage extends Component {
 
   getMovies = async () => {
     const { keyword } = this.state;
-    const movies = await apiService.getMoviesByQuery(keyword);
-    this.setState({ movies }, this.saveQueryInLocation());
+    if (keyword) {
+      const movies = await apiService.getMoviesByQuery(keyword);
+      this.setState({ movies }, this.saveQueryInLocation());
+    }
   };
   getKeyword = async (keyword) => {
     this.setState({ keyword });
