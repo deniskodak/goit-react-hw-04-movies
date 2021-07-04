@@ -4,21 +4,28 @@ import routes from "../../routes";
 import styles from "./Navigation.module.css";
 
 const Navigation = () => (
-  <nav className={styles.list}>
-      <NavLink
-        to={routes.home}
-        className={styles.link}
-        activeClassName={styles.link__active}
-      >
-        home
-      </NavLink>
-      <NavLink
-        to={routes.movies}
-        className={styles.link}
-        activeClassName={styles.link__active}
-      >
-        movies
-      </NavLink>
+  <nav>
+    <ul className={styles.list}>
+      <li className={styles.item}>
+        <NavLink
+          to={routes.home}
+          exact
+          className={styles.link}
+          activeClassName={styles.link__active}
+        >
+          home
+        </NavLink>
+      </li>
+      <li className={styles.item}>
+        <NavLink
+          to={routes.movies}
+          className={styles.link}
+          activeClassName={styles.link__active}
+        >
+          movies
+        </NavLink>
+      </li>
+    </ul>
   </nav>
 );
 

@@ -1,3 +1,11 @@
-.list {
-  padding: 0px 40px;
+.link {
+  font-size: 16px;
+  text-decoration: none;
+  color: #5855f2a3;
+}
+
+.link:hover,
+.link:active,
+.link:focus {
+  color: tomato;
 }

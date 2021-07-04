@@ -24,9 +24,9 @@ function App() {
       <AppBar />
       <Suspense fallback={<ContainerWithLoader />}>
         <Switch>
-          <Route exact path={routes.home} component={HomePage} />
+          <Route path={routes.home} exact component={HomePage} />
+          <Route path={routes.movies} exact component={MoviesPage} />
           <Route path={routes.movieDetails} component={MovieDetailsPage} />
-          <Route path={routes.movies} component={MoviesPage} />
           <Redirect to={routes.home} />
         </Switch>
       </Suspense>

@@ -1,3 +1,6 @@
+.section {
+  padding: 20px 40px;
+}
 .postcard {
   display: flex;
 }
@@ -26,14 +29,6 @@
 
 .genres__item:not(:last-child) {
   margin-right: 20px;
-}
-
-.additional_box {
-  padding: 20px 40px;
-}
-
-.additional_title {
-  margin-bottom: 30px;
 }
 
 .link {

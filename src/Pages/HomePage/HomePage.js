@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import MoviesList from "../../Components/MoviesList";
+import styles from "./HomePage.module.css";
+
 import ApiService from "../../ApiService/ApiService";
 const apiService = new ApiService();
 
@@ -19,8 +21,8 @@ class HomePage extends Component {
 
     return (
       <>
-        <section>
-          <h1>Trending today</h1>
+        <section className={styles.section}>
+          <h1 className={styles.title}>Trending today</h1>
 
           {movies && <MoviesList movies={movies} />}
         </section>

@@ -1,0 +1,18 @@
+.additional_box {
+  padding: 20px 40px;
+}
+
+.additional_title {
+  margin-bottom: 30px;
+}
+
+.link {
+  color: #5855f2a3;
+}
+.link:hover,
+.lonk:focus {
+  color: tomato;
+}
+.link__active {
+  color: tomato;
+}

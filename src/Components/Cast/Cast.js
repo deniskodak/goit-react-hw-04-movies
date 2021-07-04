@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Cast.module.css";
+import PropTypes from "prop-types";
 
 const Cast = ({ acters: { cast } }) => {
   return (
@@ -20,6 +21,20 @@ const Cast = ({ acters: { cast } }) => {
       })}
     </ul>
   );
+};
+Cast.defaultProps = {
+  cast: [],
+};
+
+Cast.propTypes = {
+  cast: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      character: PropTypes.string.isRequired,
+      original_name: PropTypes.string.isRequired,
+      profile_path: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Cast;

@@ -1,39 +1,35 @@
 import React, { Component } from "react";
 import styles from "./MovieDetailsPage.module.css";
 
-import { NavLink, Route } from "react-router-dom";
-
-import Cast from "../../Components/Cast";
-import Reviews from "../../Components/Reviews";
 import ButtonGoBack from "../../Components/ButtonGoBack";
+import MoviesAdditionalBox from "../../Components/MoviesAdditionalBox/MoviesAdditionalBox";
 
 import ApiService from "../../ApiService/ApiService";
 const apiService = new ApiService();
 
 class MovieDetailsPage extends Component {
   state = {
-    original_title: null,
-    release_date: null,
-    overview: null,
-    genres: null,
-    vote_average: null,
-    poster_path: null,
-    credits: null,
-    reviews: null,
+    movie: {},
+    location: null,
   };
 
   async componentDidMount() {
+    const location = this.props.location?.state?.from;
+
     const { movieId } = this.props.match.params;
     const movie = await apiService.getMovieById(movieId);
-    this.setState({ ...movie });
+    this.setState({ movie, location });
   }
 
   handleGoBack = () => {
-    const { history, location } = this.props;
-    return history.push(location?.state?.from);
+    const { history } = this.props;
+    const { location } = this.state;
+
+    return history.push(location);
   };
 
   render() {
+    const { movie, location } = this.state;
     const {
       original_title,
       release_date,
@@ -43,17 +39,15 @@ class MovieDetailsPage extends Component {
       poster_path,
       credits,
       reviews,
-    } = this.state;
+    } = movie;
 
-    const { match } = this.props;
+    const movieLength = Object.keys(movie).length;
 
     return (
-      <>
-        {this.props.history.action === "PUSH" && (
-          <ButtonGoBack goBack={this.handleGoBack} />
-        )}
+      <section className={styles.section}>
+        {location && <ButtonGoBack goBack={this.handleGoBack} />}
 
-        {original_title && (
+        {movieLength !== 0 && (
           <>
             <div className={styles.postcard}>
               <img
@@ -87,47 +81,10 @@ class MovieDetailsPage extends Component {
               </div>
             </div>
 
-            <div className={styles.additional_box}>
-              <h2 className={styles.additional_title}>
-                Additional information
-              </h2>
-              <ul>
-                <li>
-                  <NavLink
-                    to={`${match.url}/cast`}
-                    className={styles.link}
-                    activeClassName={styles.link__active}
-                  >
-                    Cast
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={`${match.url}/reviews`}
-                    className={styles.link}
-                    activeClassName={styles.link__active}
-                  >
-                    Reviews
-                  </NavLink>
-                </li>
-              </ul>
-
-              {credits && (
-                <Route
-                  path={`${match.path}/cast`}
-                  render={(props) => <Cast {...props} acters={credits} />}
-                />
-              )}
-              {reviews && (
-                <Route
-                  path={`${match.path}/reviews`}
-                  render={(props) => <Reviews {...props} reviews={reviews} />}
-                />
-              )}
-            </div>
+            <MoviesAdditionalBox credits={credits} reviews={reviews} />
           </>
         )}
-      </>
+      </section>
     );
   }
 }

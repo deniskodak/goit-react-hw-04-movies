@@ -1,8 +1,6 @@
 .btn {
   padding: 6px 8px;
 
-  margin-left: 30px;
-  margin-top: 10px;
   margin-bottom: 10px;
 
   font-size: 12px;
@@ -11,4 +9,10 @@
   background-color: transparent;
   color: #5855f2a3;
   border: 2px solid #5855f2a3;
+}
+
+.btn:hover,
+.btn:focus {
+  color: tomato;
+  border-color: tomato;
 }
